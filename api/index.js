@@ -3,7 +3,6 @@ import { expressMiddleware } from "@apollo/server/express4";
 import cors from "cors";
 import { json } from "body-parser";
 import express from "express";
-import { createServer } from "http";
 import { loadFiles } from "@graphql-tools/load-files";
 import path from "path";
 import resolvers from "../src/resolvers";
@@ -14,7 +13,6 @@ import AuthenticateUser from "../src/utils/authenticateUser";
 config("../.env");
 
 const app = express();
-const httpServer = createServer(app);
 
 async function startServer() {
   mongoose.connect(process.env.MONGO_URI);
@@ -48,6 +46,4 @@ async function startServer() {
 
 startServer();
 
-export default httpServer;
-
-export { app };
+export default app;
