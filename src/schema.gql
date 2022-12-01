@@ -1,0 +1,184 @@
+type TokenResponse {
+  token: String
+  expiration: String
+  error: String
+}
+
+type MessageResponse {
+  message: String
+  error: String
+}
+
+enum Gender {
+  male
+  female
+  non_binary
+  other
+}
+
+enum ReportType {
+  post
+  comment
+}
+
+enum ReportStatus {
+  done
+  ignored
+  pending
+}
+
+enum UserRank {
+  user
+  mod
+  staff
+  admin
+}
+
+type User {
+  _id: String
+  firstName: String
+  lastName: String
+  userName: String
+  email: String
+  birthday: String
+  gender: Gender
+  nickname: String
+  showNicknameInsteadName: Boolean
+  profilePicture: String
+  createdAt: String
+  rank: UserRank
+  #TODO
+  #posts:
+  following: [String]
+}
+
+type Comment {
+  _id: String
+  content: String
+  author: String
+  post: String
+  createdAt: String
+  likes: [String]
+  error: String
+}
+
+type Post {
+  _id: String
+  author: String
+  content: String
+  image: String
+  comments: [String]
+  likes: [String]
+  createdAt: String
+  error: String
+}
+
+type Report {
+  _id: String
+  content: String
+  description: String
+  type: ReportType
+  status: ReportStatus
+  createdAt: String
+  personId: String
+  attachment: String
+}
+
+input RegisterInput {
+  firstName: String!
+  lastName: String!
+  userName: String!
+  email: String!
+  password: String!
+  birthday: String!
+  gender: Gender!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input CreatePostInput {
+  content: String!
+  image: String
+}
+
+input CreateCommentInput {
+  content: String!
+}
+
+#TODO Create notifications (query mutation and subscription)
+
+type Mutation {
+  register(userData: RegisterInput!): MessageResponse
+  confirmEmail(token: String!): TokenResponse
+  login(userData: LoginInput!): TokenResponse
+
+  deleteAccount(_id: String!): Boolean
+  logout: Boolean
+
+  setNickname(nickname: String!): User
+  setBio(bio: String!): User
+  setProfilePicture(profilePicture: String!): User
+
+  createPost(post: CreatePostInput!): Post
+  updatePost(_id: String!, content: String!): Post
+  deletePost(_id: String!): Boolean
+
+  createComment(postId: String!, comment: CreateCommentInput!): Comment
+  updateComment(_id: String!, content: String!): Comment
+  deleteComment(_id: String!, postId: String): Boolean
+
+  togglePostLike(_id: String!): Boolean
+  toggleCommentLike(_id: String!): Boolean  
+
+  # TODO:
+  # report(
+  #   personId: String!
+  #   attachment: String!
+  #   content: String!
+  #   description: String!
+  #   type: ReportType!
+  # ): Boolean
+
+  # Mod features
+  # banUser(personId: String!, reportId: String!): Boolean
+  # removeReportedPost(postId: String!, reportId: String!): Boolean
+  # removeReportedComment(commentId: String!, reportId: String!): Boolean
+
+  # Staff features
+
+  # Admin features
+  # promoteUser(userId: String!, rank: UserRank!): Boolean
+}
+
+type Query {
+  hello: String
+
+  getCurrentUser: User
+  getUser(_id: String!): User
+
+  getFollowing: [User]
+  getNotFollowing: [User]
+
+  getPosts: [Post]
+  getPost(_id: String!): Post
+  getPostComments(_id: String!): [Comment]
+
+  getComment(_id: String!): Comment
+
+  getPostLikes(_id: String!): [String]
+  getPopulatedPostLikes(_id: String!): [User]
+
+  getCommentLikes(_id: String!): [String]
+  getPopulatedCommentLikes(_id: String!): [User]
+
+  # Mod features
+  # getReports(user: String): [Report]
+  # getReport(_id: String): Report
+
+  # Staff features
+
+  # Admin features
+}
