@@ -4,7 +4,8 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js"
+    "start": "babel-node index.js",
+    "dev": "nodemon index.js --exec babel-node"
   },
   "keywords": [],
   "dependencies": {
