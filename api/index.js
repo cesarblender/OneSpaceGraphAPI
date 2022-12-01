@@ -15,7 +15,9 @@ config("../.env");
 const app = express();
 
 async function startServer() {
-  mongoose.connect(process.env.MONGO_URI);
+  mongoose.connect(process.env.MONGO_URI, () => {
+    console.log("Connected to MongoDB");
+  });
 
   const server = new ApolloServer({
     typeDefs: await loadFiles(path.join(__dirname, "../src/schema.gql")),
