@@ -4,8 +4,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "start": "vercel dev",
-    "dev": "nodemon dev.js --exec \"pnpm babel-node\""
+    "start": "babel-node index.js"
   },
   "keywords": [],
   "dependencies": {
