@@ -5,7 +5,7 @@ import CommentModel from "../../models/comment";
 import GetContextUser from "../../utils/getContextUser";
 
 export default async function DeleteCommentController(root, args, context) {
-  try {
+  
     const user = GetContextUser(context);
     const { _id, postId } = args;
     console.log(args)
@@ -34,7 +34,5 @@ export default async function DeleteCommentController(root, args, context) {
     await CommentModel.findOneAndDelete({ _id });
 
     return true;
-  } catch (err) {
-    return { error: err.message };
-  }
+  
 }

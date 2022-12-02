@@ -4,7 +4,7 @@ import CommentModel from "../../models/comment";
 import GetContextUser from "../../utils/getContextUser";
 
 export default async function UpdateCommentController(root, args, context) {
-  try {
+  
     const user = GetContextUser(context);
     const { _id, content } = args;
 
@@ -21,7 +21,5 @@ export default async function UpdateCommentController(root, args, context) {
     const comment = await CommentModel.findOneAndUpdate({ _id }, { content });
 
     return comment;
-  } catch (err) {
-    return { error: err.message };
-  }
+  
 }

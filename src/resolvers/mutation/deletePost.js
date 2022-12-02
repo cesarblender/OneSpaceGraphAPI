@@ -5,7 +5,7 @@ import UserModel from "../../models/user";
 import GetContextUser from "../../utils/getContextUser";
 
 export default async function DeletePostController(root, args, context) {
-  try {
+  
     const user = GetContextUser(context);
     const { _id } = args;
 
@@ -24,7 +24,5 @@ export default async function DeletePostController(root, args, context) {
     });
 
     return true;
-  } catch (err) {
-    return { error: err.message };
-  }
+  
 }

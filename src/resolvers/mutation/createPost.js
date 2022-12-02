@@ -4,7 +4,7 @@ import PostModel from "../../models/post";
 import GetContextUser from "../../utils/getContextUser";
 
 export default async function CreatePostController(root, args, context) {
-  try {
+  
     const user = GetContextUser(context);
     const { image, content } = args.post;
 
@@ -22,7 +22,5 @@ export default async function CreatePostController(root, args, context) {
     await user.save();
 
     return newPost;
-  } catch (err) {
-    return { error: err.message };
-  }
+  
 }

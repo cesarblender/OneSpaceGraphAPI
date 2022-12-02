@@ -6,7 +6,7 @@ import ERRORS from "../../constants/errors";
 import SessionModel from "../../models/session";
 
 export default async function ConfirmEmailController(root, args, context) {
-  try {
+  
     const decoded = DecodeJWT(args.token, process.env.JWT_REGISTER_SECRET);
 
     if (!!(await UserModel.findOne({ email: decoded.email })))
@@ -38,7 +38,5 @@ export default async function ConfirmEmailController(root, args, context) {
     await user.save();
 
     return { token, expiration };
-  } catch (err) {
-    return { error: err.message };
-  }
+  
 }

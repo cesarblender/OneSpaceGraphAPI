@@ -35,7 +35,7 @@ async function startServer() {
 
         if (!token) return { user: null };
 
-        try {
+        
           const user = await AuthenticateUser(token);
           return { user };
         } catch (error) {

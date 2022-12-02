@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 import SessionModel from "../../models/session";
 
 export default async function LoginController(root, args, context) {
-  try {
+  
     const user = await UserModel.findOne({ email: args.userData.email });
 
     if (!user) {
@@ -36,7 +36,5 @@ export default async function LoginController(root, args, context) {
     await user.save();
 
     return { token, expiration };
-  } catch (err) {
-    return { error: err.message };
-  }
+  
 }

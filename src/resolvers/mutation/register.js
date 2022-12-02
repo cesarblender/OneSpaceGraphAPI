@@ -4,7 +4,7 @@ import { sendVerificationEmail } from "../../utils/sendVerificationEmail";
 import validateRegisterData from "../../validators/validateRegisterData";
 
 export default async function RegisterController(root, args, context) {
-  try {
+  
     const registerData = await validateRegisterData(args.userData);
 
     if (registerData.email === "test@test.com") {
@@ -15,7 +15,5 @@ export default async function RegisterController(root, args, context) {
     sendVerificationEmail(registerData.email, token);
 
     return { message: MESSAGES.REGISTERED_SUCCESSFULLY };
-  } catch (err) {
-    return { error: err.message };
-  }
+  
 }

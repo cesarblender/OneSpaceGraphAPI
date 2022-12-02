@@ -4,7 +4,7 @@ import PostModel from "../../models/post";
 import GetContextUser from "../../utils/getContextUser";
 
 export default async function UpdatePostController(root, args, context) {
-  try {
+  
     const user = GetContextUser(context);
     const { _id, content } = args;
 
@@ -21,7 +21,5 @@ export default async function UpdatePostController(root, args, context) {
     const post = await PostModel.findOneAndUpdate({ _id }, { content });
 
     return post;
-  } catch (err) {
-    return { error: err.message };
-  }
+  
 }

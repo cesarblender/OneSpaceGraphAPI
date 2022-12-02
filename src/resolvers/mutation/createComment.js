@@ -5,7 +5,7 @@ import CommentModel from "../../models/comment";
 import GetContextUser from "../../utils/getContextUser";
 
 export default async function CreateCommentController(root, args, context) {
-  try {
+  
     const user = GetContextUser(context);
     const { postId, comment } = args;
 
@@ -29,7 +29,5 @@ export default async function CreateCommentController(root, args, context) {
     await post.save();
 
     return newComment;
-  } catch (err) {
-    return { error: err.message };
-  }
+  
 }
