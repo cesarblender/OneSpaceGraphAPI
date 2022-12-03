@@ -22,6 +22,7 @@ import TogglePostLikeController from "./mutation/togglePostLike";
 import UpdateCommentController from "./mutation/updateComment";
 import UpdatePostController from "./mutation/updatePost";
 import SetBioController from "./mutation/setBio";
+import GetPostController from "./query/getPost";
 
 const resolvers = {
   Query: {
@@ -37,6 +38,7 @@ const resolvers = {
     getComment: GetCommentController,
     getPostLikes: GetPostLikesController,
     getPopulatedPostLikes: GetPopulatedPostLikesController,
+    getPost: GetPostController,
   },
   Mutation: {
     register: RegisterController,
